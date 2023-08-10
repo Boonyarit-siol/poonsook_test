@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home</title>
+</head>
+<body>
+    <h1>Welcome, {{ user.username }}</h1>
+    <h2>Product List:</h2>
+    <form method="post" action="/home">
+        <ul>
+            {% for product in products %}
+            <li>
+                {{ loop.index }}. {{ product.name }},
+                remaining {{ product.quantity }} {{ 'items' if product.quantity > 1 else 'item' }}
+                <label for="quantity_{{ product.name }}">Quantity:</label>
+                <input type="number" name="quantity_{{ product.name }}" min="1" max="{{ product.quantity }}">
+            </li>
+            {% endfor %}
+        </ul>
+        <input type="submit" value="Add to Cart">
+    </form>
+</body>
+</html>
